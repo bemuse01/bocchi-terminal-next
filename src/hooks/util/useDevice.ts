@@ -18,7 +18,7 @@ const useDevice = () => {
 		onResize()
 		window.addEventListener('resize', onResize)
 
-		return window.removeEventListener('resize', onResize)
+		return () => window.removeEventListener('resize', onResize)
 	}, [])
 
 	return isMobile
