@@ -1,15 +1,13 @@
 'use client'
 
-import Canvas from './components/canvas/Canvas'
+import RootUI from './pageUI'
+import useVideos from '@/hooks/data/useVideos'
 
 const Root = () => {
-	const rootClass = 'root w-full h-full absolute'
+	// data
+	useVideos()
 
-	return (
-		<div className={rootClass}>
-			<Canvas />
-		</div>
-	)
+	return <RootUI />
 }
 
 export default Root

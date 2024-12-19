@@ -1,14 +1,7 @@
 import type React from 'react'
+import type { CanvasUIProps } from '@/types/canvas'
 
-interface IProps {
-	vmax: number
-	vmin: number
-	top: number
-	left: number
-	transform: string
-}
-
-const CanvasDesktopUI: React.FunctionComponent<IProps> = ({
+const CanvasDesktopUI: React.FunctionComponent<CanvasUIProps> = ({
 	vmax,
 	vmin,
 	top,
