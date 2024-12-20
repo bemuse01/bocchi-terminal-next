@@ -4,6 +4,10 @@ interface DataState {
 	// videos
 	videos: HTMLVideoElement[]
 	setVideos: (videos: HTMLVideoElement[]) => void
+
+	// video idx
+	videoIdx: number
+	setVideoIdx: (idx: number) => void
 }
 
 const useDataStore = create<DataState>((set, get) => ({
@@ -11,6 +15,10 @@ const useDataStore = create<DataState>((set, get) => ({
 	videos: [],
 	setVideos: (newVideos: HTMLVideoElement[]) =>
 		set(() => ({ videos: newVideos })),
+
+	// video idx
+	videoIdx: 0,
+	setVideoIdx: (idx: number) => set(() => ({ videoIdx: idx })),
 }))
 
 export default useDataStore

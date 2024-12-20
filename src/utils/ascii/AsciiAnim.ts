@@ -1,5 +1,6 @@
 class AsciiAnim {
 	video: HTMLVideoElement
+	idx: number
 
 	canvas = document.createElement('canvas')
 	ctx = this.canvas.getContext('2d', { willReadFrequently: true })
@@ -7,11 +8,23 @@ class AsciiAnim {
 	chars = '@%#*+=-:. '
 	threshold = ~~(255 * ((this.chars.length - 1) / this.chars.length))
 
-	constructor(video: HTMLVideoElement) {
+	constructor(video: HTMLVideoElement, idx: number) {
 		this.video = video
+		this.idx = idx
 
 		this.canvas.width = this.video.videoWidth
 		this.canvas.height = this.video.videoHeight
+	}
+
+	// action
+	playVideo(idx: number) {
+		if (this.idx !== idx) return
+		if (this.video.paused) this.video.play()
+	}
+	stopVideo(idx: number) {
+		if (this.idx === idx) return
+		this.video.pause()
+		this.video.currentTime = 0
 	}
 
 	// method

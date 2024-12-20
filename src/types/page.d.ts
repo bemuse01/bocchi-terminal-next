@@ -8,7 +8,7 @@
 // 	}
 // }
 
-export interface CanvasUIProps {
+export interface PageUIProps {
 	vmax: number
 	vmin: number
 	top: number

@@ -1,25 +1,12 @@
 import type React from 'react'
-import type { CanvasUIProps } from '@/types/canvas'
+import Ascii from './ascii/Ascii'
 
-const CanvasMobileUI: React.FunctionComponent<CanvasUIProps> = ({
-	vmax,
-	vmin,
-	top,
-	left,
-	transform,
-}) => {
+const CanvasMobileUI = () => {
 	const canvasMobileClass = 'canvas-mobile w-full h-full absolute'
-	const canvasMobileStyle = {
-		width: `${vmax}px`,
-		height: `${vmin}px`,
-		top: `${top}px`,
-		left: `${left}px`,
-		transform,
-	}
 
 	return (
-		<div className={canvasMobileClass} style={canvasMobileStyle}>
-			<div />
+		<div className={canvasMobileClass}>
+			<Ascii />
 		</div>
 	)
 }
