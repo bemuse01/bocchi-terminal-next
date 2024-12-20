@@ -2,9 +2,11 @@ import AsciiUI from './AsciiUI'
 import { useCallback, useEffect, useRef } from 'react'
 import useAsciiAnim from '@/hooks/canvas/useAsciiAnim'
 import { CANVAS_FONT_COLOR, CANVAS_FONT_RATIO } from '@/config/style'
+import useDevice from '@/hooks/util/useDevice'
 
 const Ascii = () => {
 	// hooks
+	const isMobile = useDevice()
 	const asciiAnim = useAsciiAnim()
 
 	// canvas
@@ -17,11 +19,18 @@ const Ascii = () => {
 		if (canvasRef.current === null) return
 
 		const { width, height } = asciiRef.current.getBoundingClientRect()
-		const vmax = Math.max(width, height)
 		const vmin = Math.min(width, height)
 
-		canvasRef.current.width = vmax
-		canvasRef.current.height = vmin
+		//
+		if (isMobile) {
+			canvasRef.current.width = height
+			canvasRef.current.height = width
+		} else {
+			canvasRef.current.width = width
+			canvasRef.current.height = height
+		}
+
+		//
 		ctx.current = canvasRef.current?.getContext('2d')
 
 		if (ctx.current === null) return
@@ -31,7 +40,7 @@ const Ascii = () => {
 		ctx.current.textAlign = 'center'
 		ctx.current.font = `${fontSize}px UbuntuMonoRegular`
 		ctx.current.fillStyle = CANVAS_FONT_COLOR
-	}, [])
+	}, [isMobile])
 
 	const drawCanvas = useCallback(() => {
 		if (asciiRef.current === null) return
@@ -39,28 +48,38 @@ const Ascii = () => {
 		if (ctx.current === null || ctx.current === undefined) return
 		if (asciiAnim === null) return
 
-		const { width, height } = asciiRef.current.getBoundingClientRect()
-		const vmax = Math.max(width, height)
-		const vmin = Math.min(width, height)
-
-		ctx.current.clearRect(0, 0, vmax, vmin)
-
 		const data = asciiAnim.getVideoData()
-
 		if (data === undefined) return
 
+		//
+		const { width, height } = asciiRef.current.getBoundingClientRect()
+		const vmin = Math.min(width, height)
 		const fontSize = ~~(vmin * CANVAS_FONT_RATIO)
 		const rows = data.length
-		const offsetY = vmin / 2 - (data.length * fontSize) / 2
+
+		//
+		let x = 0
+		let offsetY = 0
+
+		if (isMobile) {
+			ctx.current.clearRect(0, 0, height, width)
+
+			x = height / 2
+			offsetY = width / 2 - (data.length * fontSize) / 2
+		} else {
+			ctx.current.clearRect(0, 0, width, height)
+
+			x = width / 2
+			offsetY = height / 2 - (data.length * fontSize) / 2
+		}
 
 		for (let i = 0; i < rows; i++) {
 			const characters = data[i].join(' ')
-			const x = vmax / 2
 			const y = offsetY + i * fontSize
 
 			ctx.current.fillText(characters, x, y)
 		}
-	}, [asciiAnim])
+	}, [asciiAnim, isMobile])
 
 	// method
 
