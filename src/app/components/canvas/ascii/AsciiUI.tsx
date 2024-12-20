@@ -6,7 +6,8 @@ interface AsciiProps {
 }
 
 const AsciiUI: FunctionComponent<AsciiProps> = ({ asciiRef, canvasRef }) => {
-	const acsiiClass = 'ascii w-full h-full absolute'
+	const acsiiClass =
+		'ascii w-full h-full absolute flex items-center justify-center'
 
 	return (
 		<div ref={asciiRef} className={acsiiClass}>

@@ -3,6 +3,7 @@ import SideMobileUI from './SideMobileUI'
 import SideDesktopUI from './SideDesktopUI'
 
 import { SIDE_DESKTOP_WIDTH } from '@/config/style'
+import { SIDE_MOBILE_WIDTH } from '@/config/style'
 
 const Side = () => {
 	// hooks
@@ -11,7 +12,14 @@ const Side = () => {
 	// desktop
 	const desktopWidth = SIDE_DESKTOP_WIDTH
 
-	return isMobile ? <SideMobileUI /> : <SideDesktopUI width={desktopWidth} />
+	// mobile
+	const mobileWidth = SIDE_MOBILE_WIDTH
+
+	return isMobile ? (
+		<SideMobileUI width={mobileWidth} />
+	) : (
+		<SideDesktopUI width={desktopWidth} />
+	)
 }
 
 export default Side

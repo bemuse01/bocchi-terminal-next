@@ -11,6 +11,8 @@
 :root {
     --background: #ffffff;
     --foreground: #171717;
+    --font-color: #10f871;
+    --font-color-a20: #10f87120;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -29,6 +31,7 @@ body {
     background: var(--background); */
     background: black;
     font-family: UbuntuMonoRegular, Arial, Helvetica, sans-serif;
+    color: var(--font-color);
     overflow: hidden;
 }
 
@@ -36,4 +39,17 @@ body {
     .text-balance {
         text-wrap: balance;
     }
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track{
+    background: transparent;
+}
+::-webkit-scrollbar-thumb{
+    background: #10f87155;
+}
+::-webkit-scrollbar-thumb:hover{
+    background: #10f871ee;
 }

@@ -15,3 +15,8 @@ export interface PageUIProps {
 	left: number
 	transform: string
 }
+
+export interface IFile {
+	key: number
+	name: string
+}
